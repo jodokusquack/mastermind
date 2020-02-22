@@ -14,7 +14,7 @@ once in the code.
 The following colors are possible:
 * Red (r)
 * Blue (b)
-* White (w)
+* Cyan (c)
 * Gray (g)
 * Yellow (y)
 * Magenta (m)
