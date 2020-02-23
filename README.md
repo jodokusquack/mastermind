@@ -12,12 +12,12 @@ The code consist of 4 colours in a specific order. Colours can appear more than
 once in the code.
 
 The following colors are possible:
-* Red (r)
-* Blue (b)
-* Cyan (c)
-* Gray (g)
-* Yellow (y)
-* Magenta (m)
+* ![#ff0000](https://via.placeholder.com/15/FF0000) Red (r)
+* ![#0000ff](https://via.placeholder.com/15/0000FF) Blue (b)
+* ![#00ffff](https://via.placeholder.com/15/00FFFF) Cyan (c)
+* ![#808080](https://via.placeholder.com/15/808080) Gray (g)
+* ![#ffff00](https://via.placeholder.com/15/FFFF00) Yellow (y)
+* ![#ff00ff](https://via.placeholder.com/15/FF00FF) Magenta (m)
 
 This is a project from [The Odin Project](https://www.theodinproject.com/),
 a free curriculum for learning web development.
