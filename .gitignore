@@ -1,0 +1,5 @@
+# ignore my test file
+test.rb
+
+# ignore .vim files
+*.vim
