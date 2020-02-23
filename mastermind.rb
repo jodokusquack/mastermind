@@ -1,19 +1,19 @@
 #!/usr/bin/env ruby
 
+require_relative "string_formatting.rb"
 require_relative "codemaker.rb"
 require_relative "codebreaker.rb"
-#require_relative "string_formatting"
 require_relative "pin.rb"
+require_relative "game.rb"
 
-codemaker = Codemaker.new()
-codebreaker = Codebreaker.new()
-
-codemaker.create_code("debug")
-puts "Code:"
-codemaker.code.each do |pin|
-  print pin.to_s
+game = Game.new()
+new_round = true
+while new_round do
+  game.play_a_round()
+  new_round = game.new_round?
 end
-puts
+puts "Thanks for playing!".green
+
 
 test_guess = [
   Pin.new("b"),
@@ -21,14 +21,4 @@ test_guess = [
   Pin.new("b"),
   Pin.new("b"),
 ]
-puts "Guess:"
-test_guess.each do |pin|
-  print pin
-end
-puts
 
-puts "Hint:"
-hint = codemaker.compare(test_guess)
-hint.each do |pin|
-  print pin
-end

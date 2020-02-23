@@ -1,7 +1,7 @@
 class Codemaker
 
   POSSIBLE_COLORS = ["b", "r", "m", "y", "g", "c"]
-  attr_reader :code
+  #attr_reader :code
 
   def initialize
 
@@ -26,8 +26,31 @@ class Codemaker
         Pin.new("b"),
         Pin.new("y"),
       ]
+      puts "Code:"
+      printit(@code)
     end
   end
+
+  # this methods checks wheter a
+  # guess is correct and returns true
+  # or false and the hint for any
+  # guess
+  def correct_guess?(guess)
+    hint = compare(guess)
+    correct_hint = [
+      Pin.new("gr"),
+      Pin.new("gr"),
+      Pin.new("gr"),
+      Pin.new("gr"),
+    ]
+    if hint == correct_hint
+      return true, hint
+    else
+      return false, hint
+    end
+  end
+
+  private
 
   def compare(guess)
     # initialize empty variables
@@ -48,15 +71,15 @@ class Codemaker
       end
     end
 
-    puts "Interrupt:"
-    arr = [guess, @code, guess_new, code_new]
-    arr.each do |var|
-      var.each do |pin|
-        print pin
-      end
-      puts
-    end
-    puts "Interrupt Ended"
+    # puts "Interrupt:"
+    # arr = [guess, @code, guess_new, code_new]
+    # arr.each do |var|
+    #   var.each do |pin|
+    #     print pin
+    #   end
+    #   puts
+    # end
+    # puts "Interrupt Ended"
 
     # second, check for all remaining
     # pins in the guess if they are
@@ -71,5 +94,12 @@ class Codemaker
     end
 
     return hint
+  end
+
+  def printit(code)
+    code.each do |pin|
+      print pin.to_s
+    end
+    puts
   end
 end
