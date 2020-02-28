@@ -1,33 +1,58 @@
 class Game
 
-  ANSWERS = {
-    one: "Congratulations Codebreaker! You broke the code.\nAre you a super spy?".green,
-    two: "Oh no! The Codemaker won. Better Luck Next time.".red,
-    three: "Good job Codemaker! The AI couldn't break your code.".green,
-    four: "Oh no, the AI broke your code. You should choose a harder one next time.".red,
-    five: "Congratulations, the Codebreaker won!".green,
-    six: "Good job Codemaker! You won.".green
-  }
+  include MastermindUtils
 
   def initialize()
-    @codemaker = Codemaker.new()
-    @codebreaker = Codebreaker.new()
     @codemaker_score = 0
     @codebreaker_score = 0
   end
 
-  def play_a_round(style="random")
-    guesses = 0
-    @codemaker.create_code(style)
-    correct_guess = false
-    while (guesses < 12 and correct_guess == false) do
-      puts "-----------------------------------"
-      begin
-        guess = @codebreaker.make_a_guess()
-      rescue ArgumentError => e
-        puts e.message.red
-        retry
+  def setup()
+    puts("Welcome to Mastermind! Check out my Github for a small explanation of the rules or just start playing. 
+
+How do you want to play?")
+    puts
+    print "       "
+    print "\e[4mCodemaker\e[0m"
+    print ":"
+    print "\e[4mCodebreaker\e[0m"
+    puts
+    puts "  [1]      AI  vs. Human    "
+    puts "  [2]    Human vs.   AI     "
+    puts "  [3]    Human vs. Human    "
+
+    begin
+      input = gets.chomp.to_i
+      if input == 1
+        @codemaker = Codemaker.new(false)
+        @codebreaker = Codebreaker.new(true)
+      elsif input == 2 
+        @codemaker = Codemaker.new(true)
+        @codebreaker = Codebreaker.new(false)
+      elsif input == 3
+        @codemaker = Codemaker.new(true)
+        @codebreaker = Codebreaker.new(true)
+      else 
+        raise InputError, "Please choose a valid option from above"
       end
+    rescue InputError => e
+      puts e.message.red
+      retry
+    rescue Interrupt
+      puts "Thanks for playing".green
+      exit
+    end
+
+  end
+
+  def play_a_round()
+    guesses = 0
+    @codemaker.create_code()
+    correct_guess = false
+    while (guesses < 10 and correct_guess == false) do
+      puts "-----------------------------------"
+      guess = @codebreaker.make_a_guess()
+
       correct_guess, hint = @codemaker.correct_guess?(guess)
       guesses += 1
       printit("Guess ##{guesses.to_s}", guess)

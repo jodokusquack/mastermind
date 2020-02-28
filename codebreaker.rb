@@ -1,39 +1,53 @@
 class Codebreaker
 
-  def initialize
+  include MastermindUtils
 
+  def initialize(consciousness)
+    @consciousness = consciousness
   end
 
   def make_a_guess()
-    puts("Make a guess by typing the four letters for your guess.")
-    input = gets.chomp
-    input = input.downcase
+    if @consciousness == true
+      puts("Make a guess by typing four letters for your colorcode.")
 
-    if input[0].downcase == "q"
-      abort("You quit the game!".red)
-    end
+      begin
+        input = gets.chomp.downcase
 
-    # check if input is in the
-    # correct form.
-    if input.length != 4
-      raise ArgumentError, "Please use exactly four colors."
-    end
-    if input.split("") - ["b", "r", "m", "y", "g", "c"] != []
-      raise ArgumentError, "Please only use the following colors:
-      * Blue: 'b'
-      * Red: 'r'
-      * Magenta: 'm'
-      * Yellow: 'y'
-      * Grey: 'g'
-      * Cyan: 'c'"
-    end
+        if input[0].downcase == "q"
+          abort("You quit the game!".red)
+        end
 
-    guess = [
-      Pin.new(input[0]),
-      Pin.new(input[1]),
-      Pin.new(input[2]),
-      Pin.new(input[3]),
-    ]
+        # check if input is in the
+        # correct form.
+        if input.length != 4
+          raise InputLengthError
+        end
+        wrong_colors = input.split("") - ["b", "r", "m", "y", "g", "c"]
+        if wrong_colors != []
+          raise WrongColorError, wrong_colors
+        end
+
+      rescue InputLengthError, WrongColorError => e
+        puts e.message.red
+        retry
+      end
+
+      guess = [
+        Pin.new(input[0]),
+        Pin.new(input[1]),
+        Pin.new(input[2]),
+        Pin.new(input[3]),
+      ]
+
+    elsif @consciousness == false
+
+      guess =[
+        Pin.new(POSSIBLE_COLORS.sample),
+        Pin.new(POSSIBLE_COLORS.sample),
+        Pin.new(POSSIBLE_COLORS.sample),
+        Pin.new(POSSIBLE_COLORS.sample),
+      ]
+    end
 
     return guess
   end

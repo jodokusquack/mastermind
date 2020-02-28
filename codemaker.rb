@@ -1,25 +1,53 @@
 class Codemaker
 
-  POSSIBLE_COLORS = ["b", "r", "m", "y", "g", "c"]
+  include MastermindUtils
+
   #attr_reader :code
 
-  def initialize
-
+  def initialize(consciousness)
+    @consciousness = consciousness
   end
 
   # create_code() creates the secret
   # Colorcode for the Codemaker.
   # The style can be "random", "choose" or
   # "debug". 
-  def create_code(style="random")
-    if style == "random"
+  def create_code()
+    puts "-----------------------------------"
+    if @consciousness == true
+      puts "Codemaker! Please enter the secret code. Make it as hard as you can!"
+
+      begin
+        input = gets.chomp.downcase
+        # check if input is in the
+        # correct form.
+        if input.length != 4
+          raise InputLengthError
+        end
+        wrong_colors = input.split("") - ["b", "r", "m", "y", "g", "c"]
+        if wrong_colors != []
+          raise WrongColorError, wrong_colors
+        end
+      rescue InputLengthError, WrongColorError => e
+        puts e.message
+        retry
+      end
+
+      @code  = [
+        Pin.new(input[0]),
+        Pin.new(input[1]),
+        Pin.new(input[2]),
+        Pin.new(input[3]),
+      ]
+
+    elsif @consciousness == false
       @code = [
         Pin.new(POSSIBLE_COLORS.sample),
         Pin.new(POSSIBLE_COLORS.sample),
         Pin.new(POSSIBLE_COLORS.sample),
         Pin.new(POSSIBLE_COLORS.sample),
       ]
-    elsif style == "debug"
+    elsif @consciousness == "debug"
       @code = [
         Pin.new("b"),
         Pin.new("c"),
