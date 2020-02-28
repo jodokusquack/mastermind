@@ -8,9 +8,12 @@ class Game
   end
 
   def setup()
-    puts("Welcome to Mastermind! Check out my Github for a small explanation of the rules or just start playing. 
-
-How do you want to play?")
+    # this asks the player as what
+    # role he wants to play and
+    # creates the codemaker/breaker
+    # accordingly.
+    puts "Welcome to Mastermind! Check out my Github for a small explanation of the rules or just start playing.".break_up(TEXT_WIDTH)
+   puts "How do you want to play?"
     puts
     print "       "
     print "\e[4mCodemaker\e[0m"
@@ -35,6 +38,7 @@ How do you want to play?")
       else 
         raise InputError, "Please choose a valid option from above"
       end
+
     rescue InputError => e
       puts e.message.red
       retry
@@ -46,9 +50,18 @@ How do you want to play?")
   end
 
   def play_a_round()
+    # this method plays a whole round
+    # until either the maker or
+    # breaker has won the game.
     guesses = 0
     @codemaker.create_code()
     correct_guess = false
+
+    # instruct the Codebreaker that
+    # it's his/her turn.
+    puts "\e[4mCodebreaker\e[0m:"
+    puts "Make a guess by typing four letters for your colorcode.".break_up(TEXT_WIDTH)
+
     while (guesses < 10 and correct_guess == false) do
       puts "-----------------------------------"
       guess = @codebreaker.make_a_guess()
@@ -60,6 +73,7 @@ How do you want to play?")
       puts "-----------------------------------"
     end
 
+    # update the scores
     if correct_guess
       @codebreaker_score += 1
       puts ANSWERS[:one]
@@ -72,7 +86,9 @@ How do you want to play?")
   end
 
   def new_round?()
-    puts "Do you want to play another round? [Y/n]"
+    # asks the player for another
+    # round
+    puts "Do you want to play another round? [Y/n]".break_up(TEXT_WIDTH)
     answer = gets.chomp.downcase
     if ["n", "q", "e"].include?(answer[0])
       return false
@@ -82,14 +98,6 @@ How do you want to play?")
   end
 
   private
-
-  def printit(label, code)
-    puts "#{label}:"
-    code.each do |pin|
-      print pin.to_s
-    end
-    puts
-  end
 
   def printscore()
     puts

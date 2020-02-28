@@ -2,23 +2,27 @@ class Codemaker
 
   include MastermindUtils
 
+  # this was for debugging
   #attr_reader :code
 
   def initialize(consciousness)
+    # humans have consciousness and
+    # AI doesn't. Yet...
     @consciousness = consciousness
   end
 
+  def create_code()
   # create_code() creates the secret
   # Colorcode for the Codemaker.
-  # The style can be "random", "choose" or
-  # "debug". 
-  def create_code()
     puts "-----------------------------------"
     if @consciousness == true
-      puts "Codemaker! Please enter the secret code. Make it as hard as you can!"
+      puts "\e[4mCodemaker\e[0m:"
+      puts "Please enter the secret code. Make it as hard as you can! Don't worry your code won't show on screen.".break_up(TEXT_WIDTH)
 
       begin
-        input = gets.chomp.downcase
+        # don't show the input on the
+        # screen
+        input = STDIN.noecho(&:gets).chomp.downcase
         # check if input is in the
         # correct form.
         if input.length != 4
@@ -29,7 +33,7 @@ class Codemaker
           raise WrongColorError, wrong_colors
         end
       rescue InputLengthError, WrongColorError => e
-        puts e.message
+        puts e.message.red
         retry
       end
 
@@ -41,6 +45,7 @@ class Codemaker
       ]
 
     elsif @consciousness == false
+      # the AI creates a random code
       @code = [
         Pin.new(POSSIBLE_COLORS.sample),
         Pin.new(POSSIBLE_COLORS.sample),
@@ -99,16 +104,6 @@ class Codemaker
       end
     end
 
-    # puts "Interrupt:"
-    # arr = [guess, @code, guess_new, code_new]
-    # arr.each do |var|
-    #   var.each do |pin|
-    #     print pin
-    #   end
-    #   puts
-    # end
-    # puts "Interrupt Ended"
-
     # second, check for all remaining
     # pins in the guess if they are
     # contained SOMEWHERE in the
@@ -124,10 +119,4 @@ class Codemaker
     return hint
   end
 
-  def printit(code)
-    code.each do |pin|
-      print pin.to_s
-    end
-    puts
-  end
 end

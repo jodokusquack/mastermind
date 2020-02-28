@@ -3,16 +3,17 @@ class Codebreaker
   include MastermindUtils
 
   def initialize(consciousness)
+    # Conciousness is true for humans
     @consciousness = consciousness
   end
 
   def make_a_guess()
     if @consciousness == true
-      puts("Make a guess by typing four letters for your colorcode.")
 
       begin
         input = gets.chomp.downcase
 
+        # allow the user to quit
         if input[0].downcase == "q"
           abort("You quit the game!".red)
         end
@@ -50,14 +51,5 @@ class Codebreaker
     end
 
     return guess
-  end
-
-  private
-
-  def printit(code)
-    code.each do |pin|
-      print pin.to_s
-    end
-    puts
   end
 end

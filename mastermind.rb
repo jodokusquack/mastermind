@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+require "io/console"
+
 require_relative "string_formatting.rb"
 require_relative "mastermind_utils.rb"
 require_relative "errors.rb"

@@ -11,4 +11,13 @@ module MastermindUtils
     six: "Good job Codemaker! You won.".green
   }
 
+  TEXT_WIDTH = 35
+
+  def printit(label, code)
+    puts "#{label}:"
+    code.each do |pin|
+      print pin.to_s
+    end
+    puts
+  end
 end
