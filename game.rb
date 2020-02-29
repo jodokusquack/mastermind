@@ -27,13 +27,13 @@ class Game
     begin
       input = gets.chomp.to_i
       if input == 1
-        @codemaker = Codemaker.new(false)
+        @codemaker = Codemaker.new(consciousness = false)
         @codebreaker = HumanCodebreaker.new()
       elsif input == 2 
-        @codemaker = Codemaker.new(true)
+        @codemaker = Codemaker.new(consciousness = true)
         @codebreaker = AICodebreaker.new()
       elsif input == 3
-        @codemaker = Codemaker.new(true)
+        @codemaker = Codemaker.new(consciousness = true)
         @codebreaker = HumanCodebreaker.new()
       else 
         raise InputError, "Please choose a valid option from above"
@@ -54,6 +54,7 @@ class Game
     # until either the maker or
     # breaker has won the game.
     guesses = 0
+
     @codemaker.create_code()
     correct_guess = false
 
@@ -65,10 +66,13 @@ class Game
     while (guesses < 10 and correct_guess == false) do
       puts "-----------------------------------"
       guess = @codebreaker.make_a_guess()
-
       correct_guess, hint = @codemaker.correct_guess?(guess)
+
+      # let the codebreaker keep track of the hints
       @codebreaker.store_hint(hint)
+
       guesses += 1
+
       guess.printit("Guess ##{guesses.to_s}")
       hint.printit("Hint")
       puts "-----------------------------------"

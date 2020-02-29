@@ -1,3 +1,5 @@
+# Create Custom Errors
+
 class WrongColorError < StandardError
   MSG = "Please only use the following colors:
       * Blue: 'b'
@@ -26,6 +28,7 @@ class InputLengthError < StandardError
 end
 
 class InputError < StandardError
+
 end
 
 class NewGameError < StandardError

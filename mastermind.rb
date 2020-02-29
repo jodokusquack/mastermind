@@ -19,9 +19,12 @@ begin
     system "clear"
     game = Game.new()
     game.setup()
+
     game.play_a_round()
     new_round = game.new_round?
+
   end
+
   puts "Thanks for playing!".green
 rescue Interrupt
   puts "Thanks for playing".green

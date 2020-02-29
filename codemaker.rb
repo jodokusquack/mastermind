@@ -2,9 +2,6 @@ class Codemaker
 
   include MastermindUtils
 
-  # for debugging:
-  #attr_reader :code
-
   def initialize(consciousness)
     # humans have consciousness and
     # AI doesn't. Yet...
@@ -12,8 +9,7 @@ class Codemaker
   end
 
   def create_code(debug=false)
-  # create_code() creates the secret
-  # Colorcode for the Codemaker.
+  # creates the secret Colorcode for the Codemaker.
     puts "-----------------------------------"
     if @consciousness == true
       puts "\e[4mCodemaker\e[0m:"
@@ -32,8 +28,7 @@ class Codemaker
   def correct_guess?(guess)
   # this methods checks wheter a
   # guess is correct and returns true
-  # or false and the hint for any
-  # guess
+  # or false AND the hint
     hint = compare(guess)
     correct_hint = Sequence.new(["gr"]*CODE_LENGTH)
 

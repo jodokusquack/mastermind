@@ -1,4 +1,7 @@
+# The Pin class represents a single color in the Colorcode sequence
+
 class Pin
+  # numbers for the terminal colors
   COLORCODES = {
     "b" => 44,
     "r" => 41,
@@ -26,6 +29,7 @@ class Pin
   end
 
   def ==(other)
+    # two pins are equal if their color is equal
     if self.class == other.class
       return @color == other.color
     else

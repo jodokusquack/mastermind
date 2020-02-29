@@ -1,6 +1,7 @@
 class AICodebreaker < Codebreaker
 
   def make_a_guess()
+    # when the computer guesses you have to press for every guess
     puts "Press Enter to see the AI's next guess."
     gets
 
@@ -11,6 +12,12 @@ class AICodebreaker < Codebreaker
 
 
   def create_guess()
+    # this lets the AI create a new guess with some
+    # "intelligence". For every green pin in the last hint, tha
+    # next guess will have a random pin at the exact same
+    # position and for every white pin it will have a random pin
+    # in a new position. All remaining pins are filled up
+    # randomly.
     if @guesses.length >= 1
       last_guess = @guesses[-1]
       last_hint = @hints[-1]
@@ -56,7 +63,7 @@ class AICodebreaker < Codebreaker
       end
 
       guess = Sequence.new(new_guess)
-    else
+    else # meaning if this is the first guess
       template =[]
       CODE_LENGTH.times do
         template.append(POSSIBLE_COLORS.sample)

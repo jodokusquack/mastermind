@@ -3,6 +3,7 @@ class Codebreaker
   include MastermindUtils
 
   def initialize()
+    # keep track of the old guesses and hints
     @hints = []
     @guesses = []
   end
