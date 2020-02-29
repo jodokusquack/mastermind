@@ -11,12 +11,12 @@ class AICodebreaker < Codebreaker
 
 
   def create_guess()
-    guess =[
-      Pin.new(POSSIBLE_COLORS.sample),
-      Pin.new(POSSIBLE_COLORS.sample),
-      Pin.new(POSSIBLE_COLORS.sample),
-      Pin.new(POSSIBLE_COLORS.sample),
-    ]
+    guess = Sequence.new(
+      POSSIBLE_COLORS.sample,
+      POSSIBLE_COLORS.sample,
+      POSSIBLE_COLORS.sample,
+      POSSIBLE_COLORS.sample,
+    )
     return guess
   end
 end

@@ -28,6 +28,8 @@ class Pin
   def ==(other)
     if self.class == other.class
       return @color == other.color
+    else
+      return false
     end
   end
 end

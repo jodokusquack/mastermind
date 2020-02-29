@@ -13,13 +13,13 @@ module MastermindUtils
 
   TEXT_WIDTH = 35
 
-  def printit(label, code)
-    puts "#{label}:"
-    code.each do |pin|
-      print pin.to_s
-    end
-    puts
-  end
+  # def printit(label, code)
+  #   puts "#{label}:"
+  #   code.each do |pin|
+  #     print pin.to_s
+  #   end
+  #   puts
+  # end
 
   def color_validate(input)
     # allow the user to start a new

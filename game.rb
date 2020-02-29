@@ -54,7 +54,7 @@ class Game
     # until either the maker or
     # breaker has won the game.
     guesses = 0
-    @codemaker.create_code()
+    @codemaker.create_code(debug=true)
     correct_guess = false
 
     # instruct the Codebreaker that
@@ -69,8 +69,8 @@ class Game
       correct_guess, hint = @codemaker.correct_guess?(guess)
       @codebreaker.store_hint(hint)
       guesses += 1
-      printit("Guess ##{guesses.to_s}", guess)
-      printit("Hint", hint)
+      guess.printit("Guess ##{guesses.to_s}")
+      hint.printit("Hint")
       puts "-----------------------------------"
     end
 

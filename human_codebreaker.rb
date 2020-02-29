@@ -15,12 +15,12 @@ class HumanCodebreaker < Codebreaker
     # if input validation didn't
     # fail, now create the guess from
     # the input
-    guess = [
-      Pin.new(input[0]),
-      Pin.new(input[1]),
-      Pin.new(input[2]),
-      Pin.new(input[3]),
-    ]
+    guess = Sequence.new(
+      input[0],
+      input[1],
+      input[2],
+      input[3],
+    )
     return guess
   end
 end

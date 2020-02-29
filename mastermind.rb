@@ -10,6 +10,7 @@ require_relative "codebreaker.rb"
 require_relative "human_codebreaker.rb"
 require_relative "ai_codebreaker.rb"
 require_relative "pin.rb"
+require_relative "sequence.rb"
 require_relative "game.rb"
 
 begin

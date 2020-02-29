@@ -11,10 +11,14 @@ class Codemaker
     @consciousness = consciousness
   end
 
-  def create_code()
+  def create_code(debug=false)
   # create_code() creates the secret
   # Colorcode for the Codemaker.
     puts "-----------------------------------"
+    if debug
+      @code = create_debug_code
+      return
+    end
     if @consciousness == true
       puts "\e[4mCodemaker\e[0m:"
       puts "Please enter the secret code. Make it as hard as you can! Don't worry your code won't show on screen.".break_up(TEXT_WIDTH)
@@ -22,8 +26,6 @@ class Codemaker
       @code = create_human_code
     elsif @consciousness == false
       @code = create_AI_code
-    elsif @consciousness == "debug"
-      @code = create_debug_code
     end
   end
 
@@ -33,12 +35,13 @@ class Codemaker
   # or false and the hint for any
   # guess
     hint = compare(guess)
-    correct_hint = [
-      Pin.new("gr"),
-      Pin.new("gr"),
-      Pin.new("gr"),
-      Pin.new("gr"),
-    ]
+    correct_hint = Sequence.new(
+      "gr",
+      "gr",
+      "gr",
+      "gr",
+    )
+
     if hint == correct_hint
       return true, hint
     else
@@ -63,7 +66,7 @@ class Codemaker
         guess_new.append(guess[index])
         code_new.append(@code[index])
       elsif pin == @code[index]
-        hint.append(Pin.new("gr"))
+        hint.append("gr")
       end
     end
 
@@ -74,12 +77,12 @@ class Codemaker
     # pin from the code_copy
     guess_new.each do |pin|
       if code_new.include?(pin)
-        hint.append(Pin.new("wh"))
+        hint.append("wh")
         code_new.delete_at(code_new.index(pin))
       end
     end
 
-    return hint
+    return Sequence.new(*hint)
   end
 
   def create_human_code()
@@ -95,36 +98,35 @@ class Codemaker
       retry
     end
 
-    code  = [
-      Pin.new(input[0]),
-      Pin.new(input[1]),
-      Pin.new(input[2]),
-      Pin.new(input[3]),
-    ]
+    code  = Sequence.new(
+      input[0],
+      input[1],
+      input[2],
+      input[3],
+    )
     return code
   end
 
   def create_AI_code()
     # the AI creates a random code
-    code = [
-      Pin.new(POSSIBLE_COLORS.sample),
-      Pin.new(POSSIBLE_COLORS.sample),
-      Pin.new(POSSIBLE_COLORS.sample),
-      Pin.new(POSSIBLE_COLORS.sample),
-    ]
+    code = Sequence.new(
+      POSSIBLE_COLORS.sample,
+      POSSIBLE_COLORS.sample,
+      POSSIBLE_COLORS.sample,
+      POSSIBLE_COLORS.sample,
+    )
     return code
   end
 
   def create_debug_code()
-    code = [
-      Pin.new("b"),
-      Pin.new("c"),
-      Pin.new("b"),
-      Pin.new("y"),
-    ]
-    puts "Code:"
-    printit(@code)
+    code = Sequence.new(
+      "b",
+      "c",
+      "b",
+      "y",
+    )
 
+    code.printit("Code")
     return code
   end
 end
