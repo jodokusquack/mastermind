@@ -14,11 +14,11 @@ require_relative "sequence.rb"
 require_relative "game.rb"
 
 begin
-  system "clear"
-  game = Game.new()
-  game.setup()
   new_round = true
   while new_round do
+    system "clear"
+    game = Game.new()
+    game.setup()
     game.play_a_round()
     new_round = game.new_round?
   end
