@@ -28,13 +28,13 @@ class Game
       input = gets.chomp.to_i
       if input == 1
         @codemaker = Codemaker.new(false)
-        @codebreaker = Codebreaker.new(true)
+        @codebreaker = HumanCodebreaker.new()
       elsif input == 2 
         @codemaker = Codemaker.new(true)
-        @codebreaker = Codebreaker.new(false)
+        @codebreaker = AICodebreaker.new()
       elsif input == 3
         @codemaker = Codemaker.new(true)
-        @codebreaker = Codebreaker.new(true)
+        @codebreaker = HumanCodebreaker.new()
       else 
         raise InputError, "Please choose a valid option from above"
       end
