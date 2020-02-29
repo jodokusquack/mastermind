@@ -67,6 +67,7 @@ class Game
       guess = @codebreaker.make_a_guess()
 
       correct_guess, hint = @codemaker.correct_guess?(guess)
+      @codebreaker.store_hint(hint)
       guesses += 1
       printit("Guess ##{guesses.to_s}", guess)
       printit("Hint", hint)
