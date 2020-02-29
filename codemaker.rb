@@ -2,7 +2,7 @@ class Codemaker
 
   include MastermindUtils
 
-  # this was for debugging
+  # for debugging:
   #attr_reader :code
 
   def initialize(consciousness)
@@ -19,56 +19,19 @@ class Codemaker
       puts "\e[4mCodemaker\e[0m:"
       puts "Please enter the secret code. Make it as hard as you can! Don't worry your code won't show on screen.".break_up(TEXT_WIDTH)
 
-      begin
-        # don't show the input on the
-        # screen
-        input = STDIN.noecho(&:gets).chomp.downcase
-        # check if input is in the
-        # correct form.
-        if input.length != 4
-          raise InputLengthError
-        end
-        wrong_colors = input.split("") - ["b", "r", "m", "y", "g", "c"]
-        if wrong_colors != []
-          raise WrongColorError, wrong_colors
-        end
-      rescue InputLengthError, WrongColorError => e
-        puts e.message.red
-        retry
-      end
-
-      @code  = [
-        Pin.new(input[0]),
-        Pin.new(input[1]),
-        Pin.new(input[2]),
-        Pin.new(input[3]),
-      ]
-
+      @code = create_human_code
     elsif @consciousness == false
-      # the AI creates a random code
-      @code = [
-        Pin.new(POSSIBLE_COLORS.sample),
-        Pin.new(POSSIBLE_COLORS.sample),
-        Pin.new(POSSIBLE_COLORS.sample),
-        Pin.new(POSSIBLE_COLORS.sample),
-      ]
+      @code = create_AI_code
     elsif @consciousness == "debug"
-      @code = [
-        Pin.new("b"),
-        Pin.new("c"),
-        Pin.new("b"),
-        Pin.new("y"),
-      ]
-      puts "Code:"
-      printit(@code)
+      @code = create_debug_code
     end
   end
 
+  def correct_guess?(guess)
   # this methods checks wheter a
   # guess is correct and returns true
   # or false and the hint for any
   # guess
-  def correct_guess?(guess)
     hint = compare(guess)
     correct_hint = [
       Pin.new("gr"),
@@ -119,4 +82,56 @@ class Codemaker
     return hint
   end
 
+  def create_human_code()
+    # begin input validation
+    begin
+      # don't show the input on the
+      # screen
+      input = STDIN.noecho(&:gets).chomp.downcase
+      # check if input is in the
+      # correct form.
+      if input.length != 4
+        raise InputLengthError
+      end
+      wrong_colors = input.split("") - ["b", "r", "m", "y", "g", "c"]
+      if wrong_colors != []
+        raise WrongColorError, wrong_colors
+      end
+    rescue InputLengthError, WrongColorError => e
+      puts e.message.red
+      retry
+    end
+
+    code  = [
+      Pin.new(input[0]),
+      Pin.new(input[1]),
+      Pin.new(input[2]),
+      Pin.new(input[3]),
+    ]
+    return code
+  end
+
+  def create_AI_code()
+    # the AI creates a random code
+    code = [
+      Pin.new(POSSIBLE_COLORS.sample),
+      Pin.new(POSSIBLE_COLORS.sample),
+      Pin.new(POSSIBLE_COLORS.sample),
+      Pin.new(POSSIBLE_COLORS.sample),
+    ]
+    return code
+  end
+
+  def create_debug_code()
+    code = [
+      Pin.new("b"),
+      Pin.new("c"),
+      Pin.new("b"),
+      Pin.new("y"),
+    ]
+    puts "Code:"
+    printit(@code)
+
+    return code
+  end
 end
