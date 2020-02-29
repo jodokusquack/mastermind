@@ -27,6 +27,9 @@ rescue Interrupt
   puts "Thanks for playing".green
   exit()
 rescue NewGameError
+  # catch if the player wants to
+  # start a new game and restart in
+  # that case
   print "New Game is starting"
   sleep(0.5)
   print(".")

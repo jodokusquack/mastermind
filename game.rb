@@ -54,7 +54,7 @@ class Game
     # until either the maker or
     # breaker has won the game.
     guesses = 0
-    @codemaker.create_code(debug=true)
+    @codemaker.create_code()
     correct_guess = false
 
     # instruct the Codebreaker that
@@ -62,7 +62,7 @@ class Game
     puts "\e[4mCodebreaker\e[0m:"
     puts "Make a guess by typing four letters for your colorcode.".break_up(TEXT_WIDTH)
 
-    while (guesses < 1000 and correct_guess == false) do
+    while (guesses < 10 and correct_guess == false) do
       puts "-----------------------------------"
       guess = @codebreaker.make_a_guess()
 

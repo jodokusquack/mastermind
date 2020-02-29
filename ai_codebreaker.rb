@@ -16,21 +16,17 @@ class AICodebreaker < Codebreaker
       last_hint = @hints[-1]
       green = Pin.new("gr")
       white = Pin.new("wh")
-      free_positions = [0,1,2,3]
-      new_guess = Array.new(4)
-
       correct_places = last_hint.count(green)
       correct_colors = last_hint.count(white)
-      puts "Got #{correct_places} correct positions."
-      puts "Got #{correct_colors} correct colors!"
+
+      free_positions = [0,1,2,3]
+      new_guess = Array.new(4)
 
       # take exactly as many samples
       # as there were correct
       # positions and copy them over
       free_positions.sample(correct_places).each do |pos|
         new_guess[pos] = last_guess[pos].color
-
-        puts "Copying Index #{pos} exactly."
 
         # after copying the guess, make
         # the position occupied
@@ -42,16 +38,12 @@ class AICodebreaker < Codebreaker
       free_positions.shuffle!
       map = free_positions.zip(free_positions.rotate).to_h
 
-      puts map
-
       # now for every correct color,
       # take a line from the mapping
       # and copy the color
       to_map = map.to_a.sample(correct_colors).to_h
       to_map.each do |from, to|
         new_guess[to] = last_guess[from].color
-
-        puts "Copied Index #{from} to Index #{to}"
       end
 
       # finally fill up all remaining
