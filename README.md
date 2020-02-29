@@ -4,7 +4,7 @@ This is the game Mastermind, played on the command line.
 
 To play it clone this repo and execute
 the file "mastermind.rb" or you can
-play it online on [repl.it](https://repl.it/@jodokusquack/mastermind).
+play it online on [![Run on Repl.it](https://repl.it/badge/github/jodokusquack/mastermind)](https://repl.it/github/jodokusquack/mastermind).
 
 The objective of the Codebreaker is to guess the Codemaker's Colorcode in 10 turns or less.
 After each guess the Codemaker gives some hints about the guess that was made:
