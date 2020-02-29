@@ -24,4 +24,15 @@ begin
 rescue Interrupt
   puts "Thanks for playing".green
   exit()
+rescue NewGameError
+  print "New Game is starting"
+  sleep(0.5)
+  print(".")
+  sleep(0.5)
+  print(".")
+  sleep(0.5)
+  print(".")
+  sleep(0.5)
+  puts
+  retry
 end

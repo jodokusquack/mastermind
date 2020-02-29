@@ -20,4 +20,25 @@ module MastermindUtils
     end
     puts
   end
+
+  def color_validate(input)
+    # allow the user to start a new
+    # game
+    if input[0..2].downcase == "new"
+      raise NewGameError
+    end
+
+    # check if input is of
+    # correct length
+    if input.length != 4
+      raise InputLengthError
+    end
+
+    # check for only possible colors
+    # are used
+    wrong_colors = input.split("") - POSSIBLE_COLORS 
+    if wrong_colors != []
+      raise WrongColorError, wrong_colors
+    end
+  end
 end

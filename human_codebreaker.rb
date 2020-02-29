@@ -16,22 +16,7 @@ class HumanCodebreaker
     # begin input validation
     begin
       input = gets.chomp.downcase
-
-      # allow the user to quit
-      if input[0].downcase == "q"
-        abort("You quit the game!".red)
-      end
-
-      # check if input is in the
-      # correct form.
-      if input.length != 4
-        raise InputLengthError
-      end
-      wrong_colors = input.split("") - ["b", "r", "m", "y", "g", "c"]
-      if wrong_colors != []
-        raise WrongColorError, wrong_colors
-      end
-
+      color_validate(input)
     rescue InputLengthError, WrongColorError => e
       puts e.message.red
       retry

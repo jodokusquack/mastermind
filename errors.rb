@@ -26,3 +26,7 @@ end
 
 class InputError < StandardError
 end
+
+class NewGameError < StandardError
+
+end

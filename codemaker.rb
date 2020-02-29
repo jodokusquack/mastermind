@@ -88,15 +88,8 @@ class Codemaker
       # don't show the input on the
       # screen
       input = STDIN.noecho(&:gets).chomp.downcase
-      # check if input is in the
-      # correct form.
-      if input.length != 4
-        raise InputLengthError
-      end
-      wrong_colors = input.split("") - ["b", "r", "m", "y", "g", "c"]
-      if wrong_colors != []
-        raise WrongColorError, wrong_colors
-      end
+
+      color_validate(input)
     rescue InputLengthError, WrongColorError => e
       puts e.message.red
       retry
