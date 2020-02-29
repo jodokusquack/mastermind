@@ -17,10 +17,11 @@ class WrongColorError < StandardError
 end
 
 class InputLengthError < StandardError
-  MSG = "Please use exactly four colors."
 
-  def initialize(msg=MSG)
-    super
+  def initialize(correct_length)
+    @correct_length = correct_length
+    msg = "Please use exactly #{correct_length} colors."
+    super(msg)(msg)
   end
 end
 

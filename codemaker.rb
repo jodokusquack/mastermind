@@ -15,10 +15,6 @@ class Codemaker
   # create_code() creates the secret
   # Colorcode for the Codemaker.
     puts "-----------------------------------"
-    if debug
-      @code = create_debug_code
-      return
-    end
     if @consciousness == true
       puts "\e[4mCodemaker\e[0m:"
       puts "Please enter the secret code. Make it as hard as you can! Don't worry your code won't show on screen.".break_up(TEXT_WIDTH)
@@ -26,6 +22,10 @@ class Codemaker
       @code = create_human_code
     elsif @consciousness == false
       @code = create_AI_code
+    end
+
+    if debug
+      @code.printit("Code")
     end
   end
 
@@ -35,12 +35,7 @@ class Codemaker
   # or false and the hint for any
   # guess
     hint = compare(guess)
-    correct_hint = Sequence.new(
-      "gr",
-      "gr",
-      "gr",
-      "gr",
-    )
+    correct_hint = Sequence.new(["gr"]*CODE_LENGTH)
 
     if hint == correct_hint
       return true, hint
@@ -82,7 +77,7 @@ class Codemaker
       end
     end
 
-    return Sequence.new(*hint)
+    return Sequence.new(hint)
   end
 
   def create_human_code()
@@ -98,35 +93,19 @@ class Codemaker
       retry
     end
 
-    code  = Sequence.new(
-      input[0],
-      input[1],
-      input[2],
-      input[3],
-    )
+    code  = Sequence.new(input.split(""))
+
     return code
   end
 
   def create_AI_code()
     # the AI creates a random code
-    code = Sequence.new(
-      POSSIBLE_COLORS.sample,
-      POSSIBLE_COLORS.sample,
-      POSSIBLE_COLORS.sample,
-      POSSIBLE_COLORS.sample,
-    )
+    template = []
+    CODE_LENGTH.times do
+      template.append(POSSIBLE_COLORS.sample)
+    end
+    code = Sequence.new(template)
     return code
   end
 
-  def create_debug_code()
-    code = Sequence.new(
-      "b",
-      "c",
-      "b",
-      "y",
-    )
-
-    code.printit("Code")
-    return code
-  end
 end

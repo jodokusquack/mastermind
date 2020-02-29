@@ -1,6 +1,7 @@
 module MastermindUtils
   POSSIBLE_COLORS = ["b", "r", "m", "y", "g", "c"]
 
+  CODE_LENGTH = 2
 
   ANSWERS = {
     one: "Congratulations Codebreaker! You broke the code.\nAre you a super spy?".green,
@@ -13,14 +14,6 @@ module MastermindUtils
 
   TEXT_WIDTH = 35
 
-  # def printit(label, code)
-  #   puts "#{label}:"
-  #   code.each do |pin|
-  #     print pin.to_s
-  #   end
-  #   puts
-  # end
-
   def color_validate(input)
     # allow the user to start a new
     # game
@@ -30,8 +23,8 @@ module MastermindUtils
 
     # check if input is of
     # correct length
-    if input.length != 4
-      raise InputLengthError
+    if input.length != CODE_LENGTH
+      raise InputLengthError, CODE_LENGTH
     end
 
     # check for only possible colors

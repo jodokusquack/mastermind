@@ -15,12 +15,7 @@ class HumanCodebreaker < Codebreaker
     # if input validation didn't
     # fail, now create the guess from
     # the input
-    guess = Sequence.new(
-      input[0],
-      input[1],
-      input[2],
-      input[3],
-    )
+    guess = Sequence.new(input.split(""))
     return guess
   end
 end

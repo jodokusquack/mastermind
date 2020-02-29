@@ -4,7 +4,7 @@ class Sequence
 
   attr_reader :sequence
 
-  def initialize(*sequence)
+  def initialize(sequence)
     @sequence = []
     sequence.each do |color|
       @sequence.append(Pin.new(color))
