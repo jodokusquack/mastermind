@@ -21,7 +21,7 @@ class InputLengthError < StandardError
   def initialize(correct_length)
     @correct_length = correct_length
     msg = "Please use exactly #{correct_length} colors."
-    super(msg)(msg)
+    super(msg)
   end
 end
 
