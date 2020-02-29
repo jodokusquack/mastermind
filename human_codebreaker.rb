@@ -6,6 +6,10 @@ class HumanCodebreaker < Codebreaker
     # begin input validation
     begin
       input = gets.chomp.downcase
+      if input == "hints"
+        print_hints
+        input = gets.chomp.downcase
+      end
       color_validate(input)
     rescue InputLengthError, WrongColorError => e
       puts e.message.red

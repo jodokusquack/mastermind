@@ -1,7 +1,7 @@
 module MastermindUtils
   POSSIBLE_COLORS = ["b", "r", "m", "y", "g", "c"]
 
-  CODE_LENGTH = 2
+  CODE_LENGTH = 4
 
   ANSWERS = {
     one: "Congratulations Codebreaker! You broke the code.\nAre you a super spy?".green,
