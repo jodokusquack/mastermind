@@ -6,13 +6,14 @@ require_relative "string_formatting.rb"
 require_relative "mastermind_utils.rb"
 require_relative "errors.rb"
 require_relative "codemaker.rb"
+require_relative "codebreaker.rb"
 require_relative "human_codebreaker.rb"
 require_relative "ai_codebreaker.rb"
 require_relative "pin.rb"
 require_relative "game.rb"
 
-system "clear"
 begin
+  system "clear"
   game = Game.new()
   game.setup()
   new_round = true

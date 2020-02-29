@@ -1,18 +1,8 @@
-class HumanCodebreaker
-
-  include MastermindUtils
-
-  def initialize()
-
-  end
-
-  def make_a_guess()
-    return create_human_guess
-  end
+class HumanCodebreaker < Codebreaker
 
   private
 
-  def create_human_guess()
+  def create_guess()
     # begin input validation
     begin
       input = gets.chomp.downcase

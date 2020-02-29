@@ -1,18 +1,16 @@
-class AICodebreaker
-
-  include MastermindUtils
+class AICodebreaker < Codebreaker
 
   def make_a_guess()
     puts "Press Enter to see the AI's next guess."
     gets
 
-    return create_AI_guess
+    super
   end
 
   private
 
 
-  def create_AI_guess()
+  def create_guess()
     guess =[
       Pin.new(POSSIBLE_COLORS.sample),
       Pin.new(POSSIBLE_COLORS.sample),
